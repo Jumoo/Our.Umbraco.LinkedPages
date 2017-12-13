@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedPages.Site", "LinkedPages.Site\LinkedPages.Site.csproj", "{66EBBC1E-F994-4370-A737-87678DEF944C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.LinkedPages", "Our.Umbraco.LinkedPages\Our.Umbraco.LinkedPages.csproj", "{DCC61215-746D-4AA9-B869-D6563EAB3978}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28D532A3-324E-4B54-A4FD-C59E99BE4CDB}"
+	ProjectSection(SolutionItems) = preProject
+		gulpfile.js = gulpfile.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66EBBC1E-F994-4370-A737-87678DEF944C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66EBBC1E-F994-4370-A737-87678DEF944C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66EBBC1E-F994-4370-A737-87678DEF944C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66EBBC1E-F994-4370-A737-87678DEF944C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96046677-725B-43F3-9402-951CD4F8100C}
+	EndGlobalSection
+EndGlobal
