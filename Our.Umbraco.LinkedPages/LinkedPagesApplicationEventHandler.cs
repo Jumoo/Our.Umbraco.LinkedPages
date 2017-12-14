@@ -42,22 +42,29 @@ namespace Our.Umbraco.LinkedPages
         {
             if (sender.TreeAlias.InvariantEquals("content"))
             {
-                if (int.TryParse(e.NodeId, out int nodeId))
+                bool showMenuItem = sender.Security.CurrentUser.Groups.Any(x => x.Alias == "admin");
+
+                if (!showMenuItem && int.TryParse(e.NodeId, out int nodeId))
                 {
                     var permissions = sender.Services.UserService.GetPermissions(sender.Security.CurrentUser, nodeId);
-                    var letter = "L";
+                    var letter = LinkedPages.PermissionLetter;
                     if (permissions.Any(x => x.AssignedPermissions.InvariantContains(letter)))
                     {
-                        var linkedItemsItem = new MenuItem("linkedPages", "Linked Pages")
-                        {
-                            Icon = "link",
-                            SeperatorBefore = true
-                        };
-
-                        linkedItemsItem.AdditionalData.Add("actionView", "/App_Plugins/LinkedPages/linkedDialog.html");
-
-                        e.Menu.Items.Insert(e.Menu.Items.Count - 1, linkedItemsItem);
+                        showMenuItem = true;
                     }
+                }
+
+                if (showMenuItem)
+                {
+                    var linkedItemsItem = new MenuItem("linkedPages", "Linked Pages")
+                    {
+                        Icon = "link",
+                        SeperatorBefore = true
+                    };
+
+                    linkedItemsItem.AdditionalData.Add("actionView", "/App_Plugins/LinkedPages/linkedDialog.html");
+
+                    e.Menu.Items.Insert(e.Menu.Items.Count - 1, linkedItemsItem);
                 }
             }
         }
