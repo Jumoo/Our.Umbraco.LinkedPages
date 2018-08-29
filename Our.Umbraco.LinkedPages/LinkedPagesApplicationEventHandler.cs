@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +27,17 @@ namespace Our.Umbraco.LinkedPages
 
         private void ServerVariablesParser_Parsing(object sender, Dictionary<string, object> e)
         {
+            var type = ConfigurationManager.AppSettings["LinkedPages.RelationType"];
+
             if (HttpContext.Current != null)
             {
                 var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
                 e.Add("LinkedPages", new Dictionary<string, object>
                 {
                     { "LinkedPageApi", urlHelper.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>(
-                       controller => controller.GetApiController() ) }
+                       controller => controller.GetApiController() ) },
+                    { "showRelationType", false },
+                    { "relationTypeAlias", type }
                 });
 
             }
@@ -40,9 +45,9 @@ namespace Our.Umbraco.LinkedPages
 
         private void ContentTreeController_MenuRendering(TreeControllerBase sender, MenuRenderingEventArgs e)
         {
-            if (sender.TreeAlias.InvariantEquals("content"))
+            if (sender.TreeAlias.InvariantEquals("content") && e.NodeId != "-1")
             {
-                bool showMenuItem = sender.Security.CurrentUser.Groups.Any(x => x.Alias == "admin");
+                bool showMenuItem = sender.Security.CurrentUser.Groups.Any(x => x.Alias.InvariantEquals("admin"));
 
                 if (!showMenuItem && int.TryParse(e.NodeId, out int nodeId))
                 {

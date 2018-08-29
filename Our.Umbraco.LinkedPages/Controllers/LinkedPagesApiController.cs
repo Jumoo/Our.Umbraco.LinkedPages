@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.EntityBase;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -13,6 +15,26 @@ namespace Our.Umbraco.LinkedPages.Controllers
     [PluginController("LinkedPages")]
     public class LinkedPagesApiController : UmbracoAuthorizedApiController
     {
+        private string defaultRelationType;
+        private int relationTypeId = 0;
+
+        public LinkedPagesApiController()
+        {
+            var type = ConfigurationManager.AppSettings["LinkedPages.RelationType"];
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                defaultRelationType = "relateDocumentOnCopy";
+            }
+            else
+            {
+                defaultRelationType = type;
+                var relationType = Services.RelationService.GetRelationTypeByAlias(type);
+                if (relationType != null)
+                {
+                    relationTypeId = relationType.Id;
+                }
+            }
+        }
 
         /// <summary>
         ///  returns true, used to get the URL of the controller,
@@ -36,20 +58,25 @@ namespace Our.Umbraco.LinkedPages.Controllers
 
             foreach (var relation in relations)
             {
-
-                var node = Services.ContentService.GetById(relation.ChildId);
-                if (node == null)
-                    continue;
-
-                var pageInfo = new LinkedPageInfo()
+                if (relationTypeId == 0 || relation.RelationTypeId == relationTypeId)
                 {
-                    RelationId = relation.Id,
-                    PageId = node.Id,
-                    Name = node.Name,
-                    Path = GetContentPath(node)
-                };
 
-                links.Add(pageInfo);
+                    var node = Services.EntityService.Get(relation.ChildId);
+                    if (node == null)
+                        continue;
+
+                    var pageInfo = new LinkedPageInfo()
+                    {
+                        RelationId = relation.Id,
+                        PageId = node.Id,
+                        Name = node.Name,
+                        Path = GetContentPath(node),
+                        RelationType = relation.RelationType.Alias,
+                        RelationTypeId = relation.RelationTypeId
+                    };
+
+                    links.Add(pageInfo);
+                }
             }
 
             return links;
@@ -66,19 +93,24 @@ namespace Our.Umbraco.LinkedPages.Controllers
 
             foreach(var relation in relations)
             {
-                var node = Services.ContentService.GetById(relation.ParentId);
-                if (node == null)
-                    continue;
-
-                var pageInfo = new LinkedPageInfo()
+                if (relationTypeId == 0 || relation.RelationTypeId == relationTypeId)
                 {
-                    RelationId = relation.Id,
-                    PageId = node.Id,
-                    Path = GetContentPath(node),
-                    Name = node.Name
-                };
+                    var node = Services.EntityService.Get(relation.ParentId);
+                    if (node == null)
+                        continue;
 
-                links.Add(pageInfo);
+                    var pageInfo = new LinkedPageInfo()
+                    {
+                        RelationId = relation.Id,
+                        PageId = node.Id,
+                        Path = GetContentPath(node),
+                        Name = node.Name,
+                        RelationType = relation.RelationType.Alias,
+                        RelationTypeId = relation.RelationTypeId
+                    };
+
+                    links.Add(pageInfo);
+                }
             }
 
             return links;
@@ -96,13 +128,15 @@ namespace Our.Umbraco.LinkedPages.Controllers
             if (parentNode == null || childNode == null)
                 return GetChildLinks(parent);
 
-            var relationType = Services.RelationService.GetRelationTypeByAlias("relateDocumentOnCopy");
+            var relationType = Services.RelationService.GetRelationTypeByAlias(defaultRelationType);
             if (relationType != null)
             {
                 var relation = new Relation(parent, child, relationType);
-
                 Services.RelationService.Save(relation);
-
+            }
+            else
+            {
+                throw new ApplicationException($"Cannot create new relation of type {defaultRelationType}");
             }
 
             return GetChildLinks(parent);
@@ -120,15 +154,18 @@ namespace Our.Umbraco.LinkedPages.Controllers
 
         }
 
-        private string GetContentPath(IContent item)
+        private string GetContentPath(IUmbracoEntity item)
         {
             if (item == null)
                 return "";
 
             var path = string.Empty;
-            var parent = item.Parent();
-            if (parent != null)
-                path += GetContentPath(parent);
+            if (item.ParentId > -1)
+            {
+                var parent = Services.EntityService.Get(item.ParentId);
+                if (parent != null)
+                    path += GetContentPath(parent);
+            }
 
             if (!string.IsNullOrWhiteSpace(path))
                 return path + " > " + item.Name;
@@ -144,5 +181,9 @@ namespace Our.Umbraco.LinkedPages.Controllers
         public int PageId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
+
+        //
+        public int RelationTypeId { get; set; }
+        public string RelationType { get; set; }
     }
 }

@@ -5,6 +5,7 @@
     function linkedDialogController(
         $scope, $q,
         navigationService,
+        notificationsService,
         dialogService,
         linkedPageService) {
 
@@ -13,6 +14,10 @@
         vm.loaded = false;
         vm.nodeId = $scope.currentNode.id;
         vm.nodeName = $scope.currentNode.name;
+
+        vm.showType = Umbraco.Sys.ServerVariables.LinkedPages.showRelationType;
+        vm.typeAlias = Umbraco.Sys.ServerVariables.LinkedPages.relationTypeAlias;
+        vm.error = '';
 
         vm.children = [];
         vm.parents = [];
@@ -36,10 +41,12 @@
                     linkedPageService.createLink(vm.nodeId, data.id)
                         .then(function (result) {
                             vm.children = result.data;
-                            vm.relationCount = vm.children.length + vm.parents.length; 
+                            vm.relationCount = vm.children.length + vm.parents.length;
+                        }, function (error) {
+                            vm.error = error.data.ExceptionMessage;
                         });
                 }
-            })
+            });
         }
 
         function removeLink(id) {
@@ -48,7 +55,9 @@
             linkedPageService.removeLink(id, vm.nodeId)
                 .then(function (result) {
                     vm.children = result.data;
-                    vm.relationCount = vm.children.length + vm.parents.length; 
+                    vm.relationCount = vm.children.length + vm.parents.length;
+                }, function (error) {
+                    vm.error = error.data.ExceptionMessage;
                 });
         }
 
@@ -59,9 +68,8 @@
                 linkedPageService.getChildren(id)
                     .then(function (result) {
                         vm.children = result.data;
-
                     }, function (error) {
-                        // error
+                        vm.error = error.data.ExceptionMessage;
                     })
             );
         }
@@ -73,6 +81,8 @@
                 linkedPageService.getParents(id)
                     .then(function (result) {
                         vm.parents = result.data;
+                    }, function (error) {
+                        vm.error = error.data.ExceptionMessage;
                     })
             );
         }

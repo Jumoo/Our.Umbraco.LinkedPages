@@ -24,3 +24,10 @@
         text-decoration: none;
         color: #00aea2;
     }
+
+.linked-page-type-notice {
+    padding: 10px 25px;
+    background-color: #f3f3f5;
+    margin: -1em -1.5em 1em -1.5em;
+    border-bottom: 1px solid #d8d7d9;
+}
