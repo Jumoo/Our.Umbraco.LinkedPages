@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>Our.Umbraco.LinkedPages</id>
-    <version>1.0.0-beta</version>
+    <version>1.0.0</version>
     <title>Linked Pages for Umbraco </title>
     <authors>Kevin Jump</authors>
     <owners>Jumoo</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides a context menu item for managing linked (relations) pages in umbraco</description>
     <summary>Provides a context menu item for managing linked (relations) pages in umbraco</summary>
-    <releaseNotes>1.0.0 Beta</releaseNotes>
-    <copyright>Jumoo 2017</copyright>
+    <releaseNotes>1.0.0</releaseNotes>
+    <copyright>Jumoo 2017-18</copyright>
     <tags>umbraco, umbraco-cms</tags>
   </metadata>
   <files>
