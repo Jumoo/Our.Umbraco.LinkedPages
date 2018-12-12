@@ -28,6 +28,7 @@ namespace Our.Umbraco.LinkedPages
         private void ServerVariablesParser_Parsing(object sender, Dictionary<string, object> e)
         {
             var type = ConfigurationManager.AppSettings["LinkedPages.RelationType"];
+            var showType = ConfigurationManager.AppSettings["LinkedPages.ShowType"].InvariantEquals("true");
 
             if (HttpContext.Current != null)
             {
@@ -36,7 +37,7 @@ namespace Our.Umbraco.LinkedPages
                 {
                     { "LinkedPageApi", urlHelper.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>(
                        controller => controller.GetApiController() ) },
-                    { "showRelationType", false },
+                    { "showRelationType", showType },
                     { "relationTypeAlias", type }
                 });
 
