@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Our.Umbraco.LinkedPages
 {
-    public static class LinkedPages
+    public class LinkedPages
     {
         public const string ProductName = "Our.Umbraco.LinkedPages";
-
-        public const string PermissionLetter = "L";
+        public const string ActionLetter = "l";
     }
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
+
+using Umbraco.Core;
 using Umbraco.Core.Models;
-using Umbraco.Core.Models.EntityBase;
+using Umbraco.Core.Models.Entities;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.WebApi;
 
@@ -15,37 +15,32 @@ namespace Our.Umbraco.LinkedPages.Controllers
     [PluginController("LinkedPages")]
     public class LinkedPagesApiController : UmbracoAuthorizedApiController
     {
-        private string defaultRelationType;
-        private int relationTypeId = 0;
+        private readonly string defaultRelationType = Constants.Conventions.RelationTypes.RelateDocumentOnCopyAlias;
+        private readonly int relationTypeId = 0;
 
         public LinkedPagesApiController()
         {
-            var type = ConfigurationManager.AppSettings["LinkedPages.RelationType"];
-            if (string.IsNullOrWhiteSpace(type))
+            var relationTypeAlias = ConfigurationManager.AppSettings["LinkedPages.RelationType"];
+            if (!string.IsNullOrWhiteSpace(relationTypeAlias))
             {
-                defaultRelationType = "relateDocumentOnCopy";
-            }
-            else
-            {
-                defaultRelationType = type;
-                var relationType = Services.RelationService.GetRelationTypeByAlias(type);
+                this.defaultRelationType = relationTypeAlias;
+
+                var relationType = Services.RelationService.GetRelationTypeByAlias(relationTypeAlias);
                 if (relationType != null)
                 {
-                    relationTypeId = relationType.Id;
+                    this.relationTypeId = relationType.Id;
                 }
             }
+
         }
 
         /// <summary>
-        ///  returns true, used to get the URL of the controller,
-        ///  when registering the constant in the script.
+        ///  simple end point - used to get the URL for the Api 
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
-        public bool GetApiController()
-        {
-            return true;
-        }
+        public bool GetApi()
+            => true;
+
 
         [HttpGet]
         public IEnumerable<LinkedPageInfo> GetChildLinks(int id)
@@ -54,32 +49,7 @@ namespace Our.Umbraco.LinkedPages.Controllers
             if (!relations.Any())
                 return Enumerable.Empty<LinkedPageInfo>();
 
-            var links = new List<LinkedPageInfo>();
-
-            foreach (var relation in relations)
-            {
-                if (relationTypeId == 0 || relation.RelationTypeId == relationTypeId)
-                {
-
-                    var node = Services.EntityService.Get(relation.ChildId);
-                    if (node == null)
-                        continue;
-
-                    var pageInfo = new LinkedPageInfo()
-                    {
-                        RelationId = relation.Id,
-                        PageId = node.Id,
-                        Name = node.Name,
-                        Path = GetContentPath(node),
-                        RelationType = relation.RelationType.Alias,
-                        RelationTypeId = relation.RelationTypeId
-                    };
-
-                    links.Add(pageInfo);
-                }
-            }
-
-            return links;
+            return GetRelations(relations, true);
         }
 
         [HttpGet]
@@ -89,55 +59,24 @@ namespace Our.Umbraco.LinkedPages.Controllers
             if (!relations.Any())
                 return Enumerable.Empty<LinkedPageInfo>();
 
-            var links = new List<LinkedPageInfo>();
-
-            foreach(var relation in relations)
-            {
-                if (relationTypeId == 0 || relation.RelationTypeId == relationTypeId)
-                {
-                    var node = Services.EntityService.Get(relation.ParentId);
-                    if (node == null)
-                        continue;
-
-                    var pageInfo = new LinkedPageInfo()
-                    {
-                        RelationId = relation.Id,
-                        PageId = node.Id,
-                        Path = GetContentPath(node),
-                        Name = node.Name,
-                        RelationType = relation.RelationType.Alias,
-                        RelationTypeId = relation.RelationTypeId
-                    };
-
-                    links.Add(pageInfo);
-                }
-            }
-
-            return links;
-
+            return GetRelations(relations, false);
         }
-
 
         [HttpPost]
         public IEnumerable<LinkedPageInfo> CreateLink(int parent, int child)
         {
-
-            var parentNode = Services.ContentService.GetById(parent);
-            var childNode = Services.ContentService.GetById(child);
+            var parentNode = Services.EntityService.Get(parent);
+            var childNode = Services.EntityService.Get(child);
 
             if (parentNode == null || childNode == null)
-                return GetChildLinks(parent);
+                throw new KeyNotFoundException();
 
             var relationType = Services.RelationService.GetRelationTypeByAlias(defaultRelationType);
-            if (relationType != null)
-            {
-                var relation = new Relation(parent, child, relationType);
-                Services.RelationService.Save(relation);
-            }
-            else
-            {
-                throw new ApplicationException($"Cannot create new relation of type {defaultRelationType}");
-            }
+            if (relationType == null)
+                throw new ApplicationException($"Cannot create relation of type {defaultRelationType}");
+
+            var relation = new Relation(parent, child, relationType);
+            Services.RelationService.Save(relation);
 
             return GetChildLinks(parent);
         }
@@ -146,23 +85,47 @@ namespace Our.Umbraco.LinkedPages.Controllers
         public IEnumerable<LinkedPageInfo> RemoveLink(int id, int currentPage)
         {
             var relation = Services.RelationService.GetById(id);
-            if (relation != null)
-            {
-                Services.RelationService.Delete(relation);
-            }
-            return GetChildLinks(currentPage);
+            if (relation == null)
+                throw new ArgumentOutOfRangeException($"Cannot find relation with id {id}");
+            
+            Services.RelationService.Delete(relation);
 
+            return GetChildLinks(currentPage);
         }
 
-        private string GetContentPath(IUmbracoEntity item)
+        private IEnumerable<LinkedPageInfo> GetRelations(IEnumerable<IRelation> relations, bool linkChild)
+        { 
+            foreach (var relation in relations)
+            {
+                if (relationTypeId == 0 ||
+                    relation.RelationTypeId == this.relationTypeId)
+                {
+                    var nodeId = linkChild ? relation.ChildId : relation.ParentId;
+                    var node = Services.EntityService.Get(nodeId);
+                    if (node == null) continue;
+
+                    yield return new LinkedPageInfo
+                    {
+                        RelationId = relation.Id,
+                        PageId = nodeId,
+                        Name = node.Name,
+                        Path = GetContentPath(node),
+                        RelationType = relation.RelationType.Alias,
+                        RelationTypeId = relation.RelationTypeId
+                    };
+                }
+            }
+        }
+
+
+        private string GetContentPath(IEntitySlim item)
         {
-            if (item == null)
-                return "";
+            if (item == null) return string.Empty;
 
             var path = string.Empty;
             if (item.ParentId > -1)
             {
-                var parent = Services.EntityService.Get(item.ParentId);
+                var parent = Services.EntityService.GetParent(item.Id);
                 if (parent != null)
                     path += GetContentPath(parent);
             }
@@ -172,7 +135,6 @@ namespace Our.Umbraco.LinkedPages.Controllers
 
             return item.Name;
         }
-
     }
 
     public class LinkedPageInfo
@@ -181,9 +143,8 @@ namespace Our.Umbraco.LinkedPages.Controllers
         public int PageId { get; set; }
         public string Name { get; set; }
         public string Path { get; set; }
-
-        //
         public int RelationTypeId { get; set; }
         public string RelationType { get; set; }
     }
+
 }

@@ -73,8 +73,11 @@
         </div>
     </div>
     <div class="umb-dialog-footer btn-toolbar umb-btn-toolbar">
-        <button class="btn btn-primary" ng-click="nav.hideDialog()">
-            <localize key="general_ok">OK</localize>
-        </button>
+
+        <umb-button type="button"
+                    button-style="link"
+                    label-key="general_close"
+                    action="vm.close()">
+        </umb-button>
     </div>
 </div>

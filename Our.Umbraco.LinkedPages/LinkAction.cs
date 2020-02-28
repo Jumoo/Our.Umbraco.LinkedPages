@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using umbraco.interfaces;
+﻿using Umbraco.Core;
+using Umbraco.Web.Actions;
 
 namespace Our.Umbraco.LinkedPages
 {
-    // can't do this - because the attribute class is internal :( 
-    // [ActionMetadata(Constants.Conventions.PermissionCategories.ContentCategory)]
     public class LinkAction : IAction
     {
-        public char Letter => 'l';
+        public char Letter => LinkedPages.ActionLetter[0];
 
         public bool ShowInNotifier => true;
 
@@ -21,8 +15,6 @@ namespace Our.Umbraco.LinkedPages
 
         public string Alias => "linkPages";
 
-        public string JsFunctionName => string.Empty;
-
-        public string JsSource => string.Empty;
+        public string Category => "structure";
     }
 }

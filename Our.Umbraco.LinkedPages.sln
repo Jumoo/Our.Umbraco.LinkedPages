@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedPages.Site", "LinkedPages.Site\LinkedPages.Site.csproj", "{66EBBC1E-F994-4370-A737-87678DEF944C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.LinkedPages", "Our.Umbraco.LinkedPages\Our.Umbraco.LinkedPages.csproj", "{E8053FE8-C906-4868-A677-F74E857EF67E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Our.Umbraco.LinkedPages", "Our.Umbraco.LinkedPages\Our.Umbraco.LinkedPages.csproj", "{DCC61215-746D-4AA9-B869-D6563EAB3978}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkedPages.Site", "LinkedPages.Site\LinkedPages.Site.csproj", "{06F2D33B-F3FA-4F11-A067-C14939974F1E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28D532A3-324E-4B54-A4FD-C59E99BE4CDB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA8A345B-B656-4C28-989C-C27BAE20B442}"
 	ProjectSection(SolutionItems) = preProject
 		gulpfile.js = gulpfile.js
 	EndProjectSection
@@ -18,19 +18,19 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{66EBBC1E-F994-4370-A737-87678DEF944C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66EBBC1E-F994-4370-A737-87678DEF944C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66EBBC1E-F994-4370-A737-87678DEF944C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66EBBC1E-F994-4370-A737-87678DEF944C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DCC61215-746D-4AA9-B869-D6563EAB3978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8053FE8-C906-4868-A677-F74E857EF67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8053FE8-C906-4868-A677-F74E857EF67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8053FE8-C906-4868-A677-F74E857EF67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8053FE8-C906-4868-A677-F74E857EF67E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06F2D33B-F3FA-4F11-A067-C14939974F1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06F2D33B-F3FA-4F11-A067-C14939974F1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06F2D33B-F3FA-4F11-A067-C14939974F1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06F2D33B-F3FA-4F11-A067-C14939974F1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {96046677-725B-43F3-9402-951CD4F8100C}
+		SolutionGuid = {E159B04A-22EA-4DFC-9DA9-2E1671614BB4}
 	EndGlobalSection
 EndGlobal

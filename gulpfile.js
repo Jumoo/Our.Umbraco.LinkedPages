@@ -1,22 +1,32 @@
 /// <binding ProjectOpened='default' />
-/*
-    copy the app_plugins folder when it changes
-    means we don't have to rebuild, and umbraco
-    loads the changes quicker.
-*/
-var gulp = require('gulp'),
-    watch = require('gulp-watch');
+const { watch, src, dest } = require('gulp');
 
-var sources = [
-    './Our.Umbraco.LinkedPages/App_Plugins'],
-    dest = './LinkedPages.Site/App_Plugins';
+const sourceFolder = './Our.Umbraco.LinkedPages/App_Plugins/';
+const source = sourceFolder + '**/*';
 
-gulp.task('monitor', function () {
+const destination = './LinkedPages.site/App_Plugins/';
 
-    sources.forEach(function (source) {
-        watch(source + '/**/*', { ignoreInitial: false, verbose: true })
-            .pipe(gulp.dest(dest));
-    });
-});
 
-gulp.task('default', ['monitor'])
+function copy(path) {
+
+    return src(path, { base: sourceFolder })
+        .pipe(dest(destination));
+}
+
+function time() {
+    return '[' + new Date().toISOString().slice(11, -5) + ']';
+}
+
+exports.default = function () {
+    watch(source, { ignoreInitial: false })
+        .on('change', function (path, stats) {
+            console.log(time(), path, 'changed');
+            copy(path);
+        })
+        .on('add', function (path, stats) {
+            console.log(time(), path, 'added');
+            copy(path);
+        });
+};
+    
+

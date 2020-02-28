@@ -13,7 +13,7 @@
             removeLink: removeLink
         };
 
-        return service; 
+        return service;
 
         /////////////////
 

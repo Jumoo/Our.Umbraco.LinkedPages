@@ -6,7 +6,7 @@
         $scope, $q,
         navigationService,
         notificationsService,
-        dialogService,
+        editorService,
         linkedPageService) {
 
         var vm = this;
@@ -27,6 +27,8 @@
         vm.removeLink = removeLink;
         vm.addLink = addLink;
 
+        vm.close = close;
+
         Init();
 
         //////////////////
@@ -34,17 +36,21 @@
         function addLink() {
             console.log('add link');
 
-            dialogService.contentPicker({
+            editorService.contentPicker({
                 multiPicker: false,
-                callback: function (data) {
-                    console.log(data);
-                    linkedPageService.createLink(vm.nodeId, data.id)
+                submit: function (model) {
+                    console.log(model);
+                    linkedPageService.createLink(vm.nodeId, model.selection[0].id)
                         .then(function (result) {
                             vm.children = result.data;
                             vm.relationCount = vm.children.length + vm.parents.length;
                         }, function (error) {
                             vm.error = error.data.ExceptionMessage;
                         });
+                    editorService.close();
+                },
+                close: function () {
+                    editorService.close();
                 }
             });
         }
@@ -101,8 +107,9 @@
                 });
         }
 
-
-
+        function close() {
+            navigationService.hideDialog();
+        }
     }
 
     angular.module('umbraco')
