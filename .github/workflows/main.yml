@@ -22,6 +22,18 @@ jobs:
     - name: Setup Nuget
       uses: warrenbuckley/Setup-Nuget@v1
 
+    - name: Cache nuget packages
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-nuget-packages
+      with:
+        path: ./packages # nuget packages stored in the package folder.
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.config') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    
     - name: Restore Packages
       run: nuget restore 
 
