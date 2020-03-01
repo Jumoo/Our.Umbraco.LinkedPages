@@ -37,4 +37,4 @@ jobs:
         nuget setapikey ${{ secrets.GITHUB_TOKEN }} -source "github"
 
     - name: Publish to github nuget
-      run: nuget push .\out\*.nupkg -source "github"
+      run: nuget push .\out\*.nupkg -source "github" -ApiKey ${{ secrets.GITHUB_TOKEN }}
