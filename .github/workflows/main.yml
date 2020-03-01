@@ -2,7 +2,10 @@ name: Build and Pack.
 
 env:
   PKG_VERSION: "8.0.0-build"
-
+  PROJECT_PATH: "Our.Umbraco.LinkedPages"
+  PROJECT_NAME: "Our.Umbraco.LinkedPages.csproj"
+  NUSPEC_FILE: "Our.Umbraco.LinkedPages.nuspec"
+    
 on: 
   push:
     branches: 
@@ -26,13 +29,13 @@ jobs:
       uses: microsoft/setup-msbuild@v1
     
     - name: Build with MSBuild
-      run: msbuild Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.csproj -p:Configuration=Release
+      run: msbuild ${{ env.PROJECT_PATH }}/${{ env.PROJECT_FILE }} -p:Configuration=Release
 
     - name: Make nuget package
-      run: nuget pack Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.nuspec -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
+      run: nuget pack ${{ env.PROJECT_PATH }}/${{ env.NUSPEC_FILE }} -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
     
     - name: Add Github Nuget repo
-      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/KevinJump/index.json 
+      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/KevinJump/index.json  -username KevinJump -password ${{ secrets.GITHUB_TOKEN }} 
 
     - name: Publish to github nuget
-      run: nuget push .\out\*.nupkg -source "github" -username KevinJumo -password ${{ secrets.GITHUB_TOKEN }} 
+      run: nuget push .\out\*.nupkg -source "github"
