@@ -32,12 +32,13 @@ jobs:
       run: msbuild ${{ env.PROJECT_PATH }}/${{ env.PROJECT_FILE }} -p:Configuration=Release
 
     - name: Make nuget package
-      run: nuget pack ${{ env.PROJECT_PATH }}/${{ env.NUSPEC_FILE }} -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
+      run: nuget pack ${{ env.PROJECT_PATH }}/${{ env.NUSPEC_FILE }} -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory .\output
     
     - name: Add Github Nuget repo
       run: |
-        nuget sources add -name "github" -source "https://nuget.pkg.github.com/KevinJump/index.json"  -username KevinJump -password ${{ secrets.GITHUB_TOKEN }} 
-        nuget setApiKey ${{ secrets.GITHUB_TOKEN }} -Source "https://nuget.pkg.github.com/KevinJump/index.json"
+        nuget sources add -name "github" -source "https://nuget.pkg.github.com/kevinjump/index.json"  -username kevinjump -password ${{ secrets.GITHUB_TOKEN }} 
+        nuget setApiKey ${{ secrets.GITHUB_TOKEN }} -Source "github"
 
     - name: Publish to github nuget
-      run: nuget push .\out\*.nupkg -source "github"
+      working-directory: .\output
+      run: nuget push *.nupkg -source "github"
