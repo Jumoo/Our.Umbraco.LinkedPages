@@ -28,7 +28,7 @@ jobs:
         cache-name: cache-nuget-packages
       with:
         path: ./packages # nuget packages stored in the package folder.
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package.config') }}
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/packages.config') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
