@@ -29,7 +29,7 @@ jobs:
       run: msbuild Our.Umbraco.LinkedPages.sln -p:Configuration=Release
 
     - name: Make nuget package
-      run: nuget pack Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.nuspec -version ${{ format("{0}-{1}", env.PKG_VERSION, github.run_number) }} -OutputDirectory out
+      run: nuget pack Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.nuspec -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
     
     - name: Add Github Nuget repo
       run: nuget sources add -name "github" -source https://nuget.pkg.github.com/KevinJump/index.json -Username KevinJump -Password ${{ secrets.GITHUB_TOKEN }}
