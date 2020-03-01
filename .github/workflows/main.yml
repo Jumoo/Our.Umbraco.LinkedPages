@@ -17,13 +17,13 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: Setup Nuget
-      run: warrenbuckley/Setup-Nuget@v1
+      uses: warrenbuckley/Setup-Nuget@v1
       
     - name: Restore Packages
       run: nuget restore Our.Umbraco.LinkedPages.sln
     
     - name: Setup MSBuild
-      run: warrenbuckley/Setup-MSBuild@1
+      uses: microsoft/setup-msbuild@v1
       
     - name: Build with MSBuild
       run: msbuild Our.Umbraco.LinkedPages.sln -p:Configuration=Release
