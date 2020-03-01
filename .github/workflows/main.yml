@@ -1,0 +1,38 @@
+name: Build and Pack.
+
+env:
+  PKG_VERSION: 8.0
+
+on: 
+  push:
+    branches: 
+      -  dev/v8
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Nuget
+      run: warrenbuckley/Setup-Nuget@v1
+      
+    - name: Restore Packages
+      run: nuget restore Our.Umbraco.LinkedPages.sln
+    
+    - name: Setup MSBuild
+      run: warrenbuckley/Setup-MSBuild@1
+      
+    - name: Build with MSBuild
+      run: msbuild Our.Umbraco.LinkedPages.sln -p:Configuration=Release
+
+    - name: Make nuget package
+      run: nuget pack Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.nuspec -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
+    
+    - name: Add Github Nuget repo
+      run: nuget sources add -name "github" -source https://nuget.pkg.github.com/KevinJump/index.json -Username KevinJump -Password ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish to github nuget
+      run: nuget push .\out\*.nupkg -source "github" -SkipDuplicates
