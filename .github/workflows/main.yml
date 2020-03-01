@@ -16,22 +16,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
         
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
-      
-    - name: Restore Packages
-      run: msbuild -t:restore
-    
-    - name: Build with MSBuild
-      run: msbuild Our.Umbraco.LinkedPages.sln -p:Configuration=Release
-
-  package:
-    needs: [build]
-    runs-on: windows-latest
-      
-    steps:
     - name: Setup Nuget
       uses: warrenbuckley/Setup-Nuget@v1
+
+    - name: Restore Packages
+      run: nuget restore 
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    
+    - name: Build with MSBuild
+      run: msbuild Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.csproj -p:Configuration=Release
 
     - name: Make nuget package
       run: nuget pack Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.nuspec -version ${{ env.PKG_VERSION }}-${{ github.run_number }} -OutputDirectory out
