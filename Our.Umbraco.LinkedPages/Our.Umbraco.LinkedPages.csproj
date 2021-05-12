@@ -248,8 +248,12 @@
     <None Include="Our.Umbraco.LinkedPages.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Folder Include="Checker\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Plugins\LinkedPages\checker\checkerController.js" />
+    <Content Include="App_Plugins\LinkedPages\checker\dashboard.html" />
     <Content Include="App_Plugins\LinkedPages\lang\en-US.xml" />
     <Content Include="App_Plugins\LinkedPages\linkedDialog.html" />
     <Content Include="App_Plugins\LinkedPages\linkedDialogController.js" />

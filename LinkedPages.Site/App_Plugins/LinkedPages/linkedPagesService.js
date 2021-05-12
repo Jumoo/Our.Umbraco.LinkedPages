@@ -10,7 +10,10 @@
             getChildren: getChildren,
             getParents: getParents,
             createLink: createLink,
-            removeLink: removeLink
+            removeLink: removeLink,
+
+            checkLinks: checkLinks,
+            fixLinks: fixLinks
         };
 
         return service;
@@ -32,6 +35,14 @@
 
         function removeLink(id, pageId) {
             return $http.delete(serviceRoot + "RemoveLink/" + id + "?currentPage=" + pageId);
+        }
+
+        function checkLinks(source, target) {
+            return $http.post(serviceRoot + "CheckLinks", { source: source, target: target });
+        }
+
+        function fixLinks(target, links) {
+            return $http.post(serviceRoot + "FixLinks", { target: target, links: links });
         }
 
     }

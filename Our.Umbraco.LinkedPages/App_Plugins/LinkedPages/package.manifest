@@ -1,9 +1,19 @@
 {
   "javascript": [
     "~/App_Plugins/LinkedPages/linkedDialogController.js",
-    "~/App_Plugins/LinkedPages/linkedPagesService.js"
+    "~/App_Plugins/LinkedPages/linkedPagesService.js",
+    
+    "~/App_Plugins/LinkedPages/checker/checkerController.js"
   ],
   "css": [
     "~/App_Plugins/LinkedPages/linkedpages.css"
+  ],
+  "dashboards": [
+    {
+      "alias": "linkedPagesChecker",
+      "sections": [ "settings" ],
+      "view": "~/App_Plugins/LinkedPages/checker/dashboard.html",
+      "weight": 101
+    }
   ]
 }

@@ -24,11 +24,21 @@ namespace Our.Umbraco.LinkedPages
 
     public class LinkedPagesComponent : IComponent
     {
+        private List<string> Groups = new List<string> { "Admin" };
+
         public void Initialize()
         {
             ContentTreeController.MenuRendering += ContentTreeController_MenuRendering;
             ServerVariablesParser.Parsing += ServerVariablesParser_Parsing;
+
+            var groups = ConfigurationManager.AppSettings["LinkedPages.Groups"];
+            if (!string.IsNullOrWhiteSpace(groups))
+            {
+                this.Groups = groups.ToDelimitedList().ToList();
+            }
         }
+
+
 
         private void ServerVariablesParser_Parsing(object sender, Dictionary<string, object> e)
         {
@@ -55,7 +65,7 @@ namespace Our.Umbraco.LinkedPages
             // only the content tree and not the root.
             if (!sender.TreeAlias.InvariantEquals("content") || e.NodeId == "-1") return;
 
-            bool showMenu = sender.Security.CurrentUser.Groups.Any(x => x.Alias.InvariantContains("admin"));
+            var showMenu = sender.Security.CurrentUser.Groups.Any(x => this.Groups.InvariantContains(x.Alias));
             if (!showMenu && int.TryParse(e.NodeId, out int nodeId))
             {
                 var permissions = sender.Services.UserService
