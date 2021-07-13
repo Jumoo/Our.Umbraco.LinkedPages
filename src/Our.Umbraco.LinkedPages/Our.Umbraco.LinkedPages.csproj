@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net50;net472</TargetFrameworks>
+		<ContentTargetFolders>content</ContentTargetFolders>
+
+		<Product>Our.Umbraco.LinkedPages</Product>
+		<PackageId>Our.Umbraco.LinkedPages</PackageId>
+		<Title>Linked pages for Umbraco</Title>
+		<Description>View and Manage relations between pages in Umbraco</Description>
+		<PackageTags>umbraco</PackageTags>
+
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+		<PackageReference Include="UmbracoCms.Web" version="8.5.4" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net50'">
+		<PackageReference Include="Umbraco.Cms.Web.Website" version="9.0.0-rc001" />
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="9.0.0-rc001" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Content Include="App_Plugins\LinkedPages\**\*.*">
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
+		</Content>
+
+		<None Include="build\**\*.*">
+			<Pack>True</Pack>
+			<PackagePath>buildTransitive</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

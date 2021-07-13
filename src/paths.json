@@ -1,0 +1,11 @@
+{
+    "library": "Our.Umbraco.LinkedPages",
+    "sites": [
+        "LinkedPages.EightSite",
+        "LinkedPages.CoreSite"
+    ],
+    "plugins": [
+        { "library": "Our.Umbraco.LinkedPages", "pluginFolder" : "LinkedPages" }
+    ]
+}
+  

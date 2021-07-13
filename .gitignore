@@ -18,6 +18,8 @@ Bin/
 # Config/
 Archive/
 build/
+[Mm]edia/*
+![Mm]edia/[Ww]eb.config
 
 
 # Build results

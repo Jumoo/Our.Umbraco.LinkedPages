@@ -1,0 +1,35 @@
+﻿/*
+*/
+.linked-page-info {
+    background: #f3f3f5;
+    border-radius: 3px;
+    border: 1px solid #d8d7d9;
+    padding: 15px 10px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.linked-page-action {
+    font-size: 13px;
+    padding: 10px;
+}
+
+.linked-page-add {
+    border: 1px dashed #bbbabf;
+    text-align: center;
+    background-color: #fff;
+    display: block;
+}
+
+    .linked-page-add:hover {
+        text-decoration: none;
+        color: #00aea2;
+    }
+
+.linked-page-type-notice {
+    padding: 10px 25px;
+    background-color: #f3f3f5;
+    margin: -1em -20px 1em -20px;
+    border-bottom: 1px solid #d8d7d9;
+}
