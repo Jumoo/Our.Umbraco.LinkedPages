@@ -62,7 +62,7 @@ namespace Our.Umbraco.LinkedPages
             if (notification.TreeAlias != Constants.Trees.Content) return;
 
             var currentUser = _backOfficeSecurityAccessor.BackOfficeSecurity.CurrentUser;
-            var showMenu = currentUser.Groups.Any(x => x.Alias.InvariantContains("admin"));
+            var showMenu = currentUser.Groups.Any(x => x.Alias.InvariantContains(Constants.Security.AdminGroupAlias));
 
             if (!showMenu && int.TryParse(notification.NodeId, out int nodeId))
             {

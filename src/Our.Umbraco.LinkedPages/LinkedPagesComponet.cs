@@ -59,7 +59,7 @@ namespace Our.Umbraco.LinkedPages
             // only the content tree and not the root.
             if (!sender.TreeAlias.InvariantEquals("content") || e.NodeId == "-1") return;
 
-            bool showMenu = sender.Security.CurrentUser.Groups.Any(x => x.Alias.InvariantContains("admin"));
+            bool showMenu = sender.Security.CurrentUser.Groups.Any(x => x.Alias.InvariantContains(Constants.Security.AdminGroupAlias));
             if (!showMenu && int.TryParse(e.NodeId, out int nodeId))
             {
                 var permissions = sender.Services.UserService
