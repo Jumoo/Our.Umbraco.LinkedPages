@@ -17,7 +17,6 @@ App_Data/
 Bin/
 # Config/
 Archive/
-build/
 [Mm]edia/*
 ![Mm]edia/[Ww]eb.config
 
