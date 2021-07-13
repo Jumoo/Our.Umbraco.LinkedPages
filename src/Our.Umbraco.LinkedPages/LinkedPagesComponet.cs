@@ -45,12 +45,12 @@ namespace Our.Umbraco.LinkedPages
             var urlHelper = new UrlHelper(new RequestContext(
                 new HttpContextWrapper(HttpContext.Current), new RouteData()));
 
-            e.Add("LinkedPages", new Dictionary<string, object>
+            e.Add(LinkedPages.Variables.Name, new Dictionary<string, object>
             {
-                { "LinkedPageApi", urlHelper.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>( c => c.GetApi()) },
-                { "showRelationType", _config.ShowType },
-                { "relationTypeAlias", _config.RelationType },
-                { "ignoredTypes", _config.ignoredTypes }
+                { LinkedPages.Variables.ApiRoute, urlHelper.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>( c => c.GetApi()) },
+                { LinkedPages.Variables.ShowRelationType, _config.ShowType },
+                { LinkedPages.Variables.RelationTypeAlias, _config.RelationType },
+                { LinkedPages.Variables.IgnoredTypes, _config.ignoredTypes }
             });
         }
 
@@ -76,8 +76,7 @@ namespace Our.Umbraco.LinkedPages
                     SeparatorBefore = true
                 };
 
-                linkedPagedItem.AdditionalData.Add("actionView",
-                    UriUtility.ToAbsolute("/App_Plugins/LinkedPages/linkedDialog.html"));
+                linkedPagedItem.AdditionalData.Add("actionView", UriUtility.ToAbsolute(LinkedPages.ActionView));
 
                 e.Menu.Items.Insert(e.Menu.Items.Count - 1, linkedPagedItem);
             }

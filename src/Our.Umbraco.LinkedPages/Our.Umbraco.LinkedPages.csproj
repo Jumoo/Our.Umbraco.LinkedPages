@@ -7,7 +7,7 @@
 		<Product>Our.Umbraco.LinkedPages</Product>
 		<PackageId>Our.Umbraco.LinkedPages</PackageId>
 		<Title>Linked pages for Umbraco</Title>
-		<Description>View and Manage relations between pages in Umbraco</Description>
+		<Description>View and Manage relations between pages in Umbraco v8 &amp; v9</Description>
 		<PackageTags>umbraco</PackageTags>
 
 	</PropertyGroup>

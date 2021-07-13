@@ -48,12 +48,12 @@ namespace Our.Umbraco.LinkedPages
 
         public void Handle(ServerVariablesParsingNotification notification)
         {
-            notification.ServerVariables.Add("LinkedPages", new Dictionary<string, object>
+            notification.ServerVariables.Add(LinkedPages.Variables.Name, new Dictionary<string, object>
             {
-                { "LinkedPageApi", _linkGenerator.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>(c => c.GetApi()) },
-                { "showRelationType", _config.ShowType },
-                { "relationTypeAlias", _config.RelationType },
-                { "ignoredTypes", _config.ignoredTypes }
+                { LinkedPages.Variables.ApiRoute, _linkGenerator.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>(c => c.GetApi()) },
+                { LinkedPages.Variables.ShowRelationType, _config.ShowType },
+                { LinkedPages.Variables.RelationTypeAlias, _config.RelationType },
+                { LinkedPages.Variables.IgnoredTypes, _config.ignoredTypes }
             });
         }
 
@@ -79,7 +79,7 @@ namespace Our.Umbraco.LinkedPages
                     SeparatorBefore = true
                 };
 
-                item.AdditionalData.Add("actionView", "/App_Plugins/LinkedPages/linkedDialog.html");
+                item.AdditionalData.Add("actionView", LinkedPages.ActionView);
 
                 notification.Menu.Items.Insert(notification.Menu.Items.Count - 1, item);
             }
