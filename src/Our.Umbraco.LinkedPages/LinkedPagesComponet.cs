@@ -1,5 +1,5 @@
 ﻿//
-// Component is only used in netcore app to hook into menu and server variable parser. 
+// Component is only used in .netframework app to hook into menu and server variable parser. 
 //
 #if NETFRAMEWORK
 
