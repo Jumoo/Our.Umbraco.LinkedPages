@@ -21,11 +21,11 @@ using Umbraco.Web.Models.Trees;
 
 namespace Our.Umbraco.LinkedPages
 {
-    public class LinkedPagesComponet : IComponent
+    public class LinkedPagesComponent : IComponent
     {
         private readonly LinkedPagesConfig _config;
 
-        public LinkedPagesComponet(LinkedPagesConfig config)
+        public LinkedPagesComponent(LinkedPagesConfig config)
         {
             _config = config;
         }

@@ -26,7 +26,7 @@ namespace Our.Umbraco.LinkedPages
         {
             composition.RegisterUnique<LinkedPagesConfig>();
 
-            composition.Components().Append<LinkedPagesComponet>();
+            composition.Components().Append<LinkedPagesComponent>();
         }
 #endif
     }
