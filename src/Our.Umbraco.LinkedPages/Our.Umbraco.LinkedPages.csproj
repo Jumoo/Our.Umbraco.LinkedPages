@@ -17,8 +17,8 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net50'">
-		<PackageReference Include="Umbraco.Cms.Web.Website" version="9.0.0-rc001" />
-		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="9.0.0-rc001" />
+		<PackageReference Include="Umbraco.Cms.Web.Website" version="9.0.0-rc003" />
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="9.0.0-rc003" />
 	</ItemGroup>
 
 
