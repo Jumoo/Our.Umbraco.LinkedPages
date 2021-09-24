@@ -10,7 +10,13 @@
 		<Description>View and Manage relations between pages in Umbraco v8 &amp; v9</Description>
 		<PackageTags>umbraco</PackageTags>
 
+
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="docs\README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
 		<PackageReference Include="UmbracoCms.Web" version="8.5.4" />
