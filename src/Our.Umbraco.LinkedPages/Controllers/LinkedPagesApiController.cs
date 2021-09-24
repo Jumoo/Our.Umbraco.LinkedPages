@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 #if NETCOREAPP
-
 using Microsoft.AspNetCore.Mvc;
 
 using Umbraco.Cms.Core;
@@ -19,12 +18,12 @@ using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.Entities;
 using Umbraco.Core.Services;
-using Umbraco.Web.WebApi;
+using Umbraco.Web.Editors;
 #endif
 
 namespace Our.Umbraco.LinkedPages.Controllers
 {
-    public class LinkedPagesApiController : UmbracoAuthorizedApiController
+    public class LinkedPagesApiController : UmbracoAuthorizedJsonController
     {
         private readonly IRelationService _relationService;
         private readonly IEntityService _entityService;
