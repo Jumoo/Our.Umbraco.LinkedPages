@@ -1,6 +1,6 @@
 param($version, $suffix, $env='release', [switch]$push=$false)
 
-$fullVersion = -join($version, '-', $suffix)
+$fullVersion = $version  #  -join($version, '-', $suffix)
 $outFolder = ".\$fullVersion"
 $packageProj = "..\src\Our.Umbraco.LinkedPages\Our.Umbraco.LinkedPages.csproj"
 
