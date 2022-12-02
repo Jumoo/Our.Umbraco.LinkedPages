@@ -1,9 +1,0 @@
-{
-  "javascript": [
-    "~/App_Plugins/LinkedPages/linkedPagesDialogController.js",
-    "~/App_Plugins/LinkedPages/linkedPagesService.js"
-  ],
-  "css": [
-    "~/App_Plugins/LinkedPages/linkedpages.css"
-  ]
-}

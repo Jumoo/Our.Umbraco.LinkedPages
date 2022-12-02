@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net50;net472</TargetFrameworks>
+		<TargetFrameworks>net60;net472</TargetFrameworks>
 		<ContentTargetFolders>content</ContentTargetFolders>
 
 		<Product>Our.Umbraco.LinkedPages</Product>
 		<PackageId>Our.Umbraco.LinkedPages</PackageId>
 		<Title>Linked pages for Umbraco</Title>
 		<Description>View and Manage relations between pages in Umbraco v8 &amp; v9</Description>
-		<PackageTags>umbraco</PackageTags>
+		<PackageTags>umbraco umbraco-marketplace</PackageTags>
 
 
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -22,9 +22,9 @@
 		<PackageReference Include="UmbracoCms.Web" version="8.5.4" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net50'">
-		<PackageReference Include="Umbraco.Cms.Web.Website" version="9.0.0" />
-		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="9.0.0" />
+	<ItemGroup Condition="'$(TargetFramework)' == 'net60'">
+		<PackageReference Include="Umbraco.Cms.Web.Website" version="10.0.0" />
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="10.0.0" />
 	</ItemGroup>
 
 

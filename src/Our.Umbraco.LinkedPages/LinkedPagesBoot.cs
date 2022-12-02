@@ -1,4 +1,6 @@
 ﻿#if NETCOREAPP
+using Microsoft.Extensions.DependencyInjection;
+
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Cms.Core.Notifications;
@@ -15,7 +17,7 @@ namespace Our.Umbraco.LinkedPages
 #if NETCOREAPP
         public void Compose(IUmbracoBuilder builder)
         {
-            builder.Services.AddUnique<LinkedPagesConfig>();
+            builder.Services.AddSingleton<LinkedPagesConfig>();
 
             builder.AddNotificationHandler<ServerVariablesParsingNotification, LinkPagedNotificationHandler>();
             builder.AddNotificationHandler<MenuRenderingNotification, LinkPagedNotificationHandler>();
