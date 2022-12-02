@@ -1,0 +1,32 @@
+{
+    "$schema": "https://marketplace.umbraco.com/umbraco-marketplace-schema.json",
+    "AuthorDetails": {
+        "Name": "Jumoo",
+        "Description": "Jumoo are a software development company based in the UK",
+        "Url": "https://jumoo.co.uk",
+        "ImageUrl": "https://jumoo.co.uk/img/ju_square.jpg"
+    },
+    "Category": "Editor Tools",
+    "PackageType": "Package",
+    "LicenseTypes": ["Free"],
+    "Tags": [ "translation", "relations" ],
+    "PackagesByAuthor": [
+        "uSync",
+        "uSync.Complete",
+        "Jumoo.TranslationManger",
+        "Our.Umbraco.BackOfficeThemes",
+        "Our.Umbraco.LinkedPages",
+        "Our.Umbraco.MaintenanceMode"
+    ],
+    "RelatedPackages": [
+        { 
+            "PackageId": "Jumoo.TranslationManager",
+            "Description": "Translation tools for Umbraco"
+        }
+    ],
+
+    "Title": "Linked Pages",
+    "Description": "Quickly manage relationship links between pages within Umbraco",
+    "DiscussionForumUrl": "https://our.umbraco.com/packages/backoffice-extensions/linked-pages/linked-pages-feedback/",
+    "IssueTrackerUrl": "https://github.com/KevinJump/Our.Umbraco.LinkedPages/issues"
+}

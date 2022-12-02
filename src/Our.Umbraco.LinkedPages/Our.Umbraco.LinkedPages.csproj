@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks>net60;net472</TargetFrameworks>
+		<TargetFrameworks>net6.0</TargetFrameworks>
 		<ContentTargetFolders>content</ContentTargetFolders>
 
 		<Product>Our.Umbraco.LinkedPages</Product>
@@ -10,34 +10,29 @@
 		<Description>View and Manage relations between pages in Umbraco v8 &amp; v9</Description>
 		<PackageTags>umbraco umbraco-marketplace</PackageTags>
 
+		<PackageProjectUrl>https://github.com/KevinJump/Our.Umbraco.LinkedPages</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/KevinJump/Our.Umbraco.LinkedPages</RepositoryUrl>
+
+		<StaticWebAssetBasePath>App_Plugins</StaticWebAssetBasePath>
 
 		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageIcon>logo.png</PackageIcon>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="docs\README.md" Pack="true" PackagePath="\"/>
+		<None Include="docs\README.md" Pack="true" PackagePath="\" />
+		<None Include="logo.png" Pack="true" PackagePath="\" />
 	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net472'">
-		<PackageReference Include="UmbracoCms.Web" version="8.5.4" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net60'">
-		<PackageReference Include="Umbraco.Cms.Web.Website" version="10.0.0" />
-		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="10.0.0" />
-	</ItemGroup>
-
 
 	<ItemGroup>
-		<Content Include="App_Plugins\LinkedPages\**\*.*">
-			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-			<CopyToPublishDirectory>Always</CopyToPublishDirectory>
-		</Content>
+		<PackageReference Include="Umbraco.Cms.Web.Website" version="[10.0.0,13.0.0)" />
+		<PackageReference Include="Umbraco.Cms.Web.BackOffice" version="[10.0.0,13.0.0)" />
+	</ItemGroup>
 
+	<ItemGroup>
 		<None Include="build\**\*.*">
 			<Pack>True</Pack>
 			<PackagePath>buildTransitive</PackagePath>
 		</None>
 	</ItemGroup>
-
 </Project>
