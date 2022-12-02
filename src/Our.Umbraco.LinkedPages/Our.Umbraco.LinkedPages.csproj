@@ -10,8 +10,8 @@
 		<Description>View and Manage relations between pages in Umbraco v8 &amp; v9</Description>
 		<PackageTags>umbraco umbraco-marketplace</PackageTags>
 
-		<PackageProjectUrl>https://github.com/KevinJump/Our.Umbraco.LinkedPages</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/KevinJump/Our.Umbraco.LinkedPages</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/Jumoo/Our.Umbraco.LinkedPages</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Jumoo/Our.Umbraco.LinkedPages</RepositoryUrl>
 
 		<StaticWebAssetBasePath>App_Plugins</StaticWebAssetBasePath>
 
