@@ -6,6 +6,7 @@
         "Url": "https://jumoo.co.uk",
         "ImageUrl": "https://jumoo.co.uk/img/ju_square.jpg"
     },
+    "AlternatePackageNames": [ "LinkedPages" ],
     "Category": "Editor Tools",
     "PackageType": "Package",
     "LicenseTypes": ["Free"],
