@@ -80,10 +80,10 @@ public class LinkedPagesApiController : UmbracoAuthorizedJsonController
 
         if (parentNode == null || childNode == null)
             throw new KeyNotFoundException();
-
-        var relationType = _relationService.GetRelationTypeByAlias(defaultRelationType);
+        var typeAlias = _config.RelationType ?? defaultRelationType;
+        var relationType = _relationService.GetRelationTypeByAlias(typeAlias);
         if (relationType == null)
-            throw new ApplicationException($"Cannot create relation of type {defaultRelationType}");
+            throw new ApplicationException($"Cannot create relation of type {typeAlias}");
 
         var relation = new Relation(parent, child, relationType);
         _relationService.Save(relation);
