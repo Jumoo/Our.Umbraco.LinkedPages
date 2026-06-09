@@ -47,7 +47,7 @@ public class LinkPagedNotificationHandler :
             { LinkedPages.Variables.ApiRoute, _linkGenerator.GetUmbracoApiServiceBaseUrl<LinkedPagesApiController>(c => c.GetApi()) },
             { LinkedPages.Variables.ShowRelationType, _config.ShowType },
             { LinkedPages.Variables.RelationTypeAlias, _config.RelationType },
-            { LinkedPages.Variables.IgnoredTypes, _config.ignoredTypes }
+            { LinkedPages.Variables.IgnoredTypes, _config.IgnoredTypes }
         });
     }
 

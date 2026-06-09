@@ -17,7 +17,7 @@ public class LinkedPagesConfig
     public string RelationType => GetConfigValue("LinkedPages:RelationType", string.Empty);
     public bool ShowType => GetConfigValue("LinkedPages:ShowType", true);
 
-    public string ignoredTypes => GetConfigValue("LinkedPages:Ignore", "umbMedia,umbDocument");
+    public string IgnoredTypes => GetConfigValue("LinkedPages:Ignore", "umbMedia,umbDocument");
 
     private TResult GetConfigValue<TResult>(string path, TResult defaultValue)
     {

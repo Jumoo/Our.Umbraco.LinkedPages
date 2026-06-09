@@ -1,0 +1,14 @@
+{
+  "id": "Umbraco.Community.LinkedPages",
+  "name": "Umbraco.Community.LinkedPages",
+  "version": "0.0.0",
+  "allowTelemetry": true,
+  "extensions": [
+    {
+      "name": "Umbraco Community Linked Pages Bundle",
+      "alias": "Umbraco.Community.LinkedPages.Bundle",
+      "type": "bundle",
+      "js": "/App_Plugins/UmbracoCommunityLinkedPages/umbraco-community-linked-pages.js"
+    }
+  ]
+}

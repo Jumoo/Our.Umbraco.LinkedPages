@@ -248,3 +248,5 @@ $RECYCLE.BIN/
 .sonarqube
 
 src/.idea
+/src/LinkedPages.Site
+/src/Umbraco.Community.LinkedPages/wwwroot/App_Plugins/UmbracoCommunityLinkedPages

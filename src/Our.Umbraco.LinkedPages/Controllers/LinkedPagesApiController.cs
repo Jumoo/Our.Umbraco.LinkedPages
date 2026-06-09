@@ -37,7 +37,7 @@ public class LinkedPagesApiController : UmbracoAuthorizedJsonController
 
     private int[] GetIgnoredTypeIds()
     {
-        var ignore = _config.ignoredTypes.ToDelimitedList();
+        var ignore = _config.IgnoredTypes.ToDelimitedList();
         var types = _relationService.GetAllRelationTypes();
 
         return types.Where(x => ignore.InvariantContains(x.Alias))

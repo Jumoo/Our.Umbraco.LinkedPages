@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="LinkedPages.Site/LinkedPages.Site.csproj" />
+  <Project Path="Our.Umbraco.LinkedPages/Our.Umbraco.LinkedPages.csproj" />
+  <Project Path="Umbraco.Community.LinkedPages/Umbraco.Community.LinkedPages.csproj" />
+</Solution>
