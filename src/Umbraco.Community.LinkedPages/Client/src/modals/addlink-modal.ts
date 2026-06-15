@@ -44,10 +44,7 @@ export class AddLinkDialogElement
 
   render() {
     return html`
-      <umb-body-layout>
-        <div slot="header">
-          <h1>Add Link</h1>
-        </div>
+      <umb-body-layout headline="Add Link">
         <uui-box>${this.renderPicker()}</uui-box>
         <div slot="actions">
           <div class="buttons">

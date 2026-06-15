@@ -38,7 +38,7 @@ export class LinkedItemView extends UmbLitElement {
           <div>
             <div><strong>${this.item?.name}</strong></div>
             <em>${this.item?.path}</em>
-            <div>
+            <div class="Muted">
               ${when(
                 this.showType,
                 () => html`<em>${this.item?.relationType}</em>`,
@@ -66,6 +66,10 @@ export class LinkedItemView extends UmbLitElement {
     .linked-page-info {
       display: flex;
       justify-content: space-between;
+    }
+
+    .Muted {
+      color: var(--uui-color-disabled-contrast);
     }
   `;
 }

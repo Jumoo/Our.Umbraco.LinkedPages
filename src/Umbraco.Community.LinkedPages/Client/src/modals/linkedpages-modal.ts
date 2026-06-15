@@ -111,19 +111,15 @@ export class LinkedPagesDialogElement
 
   render() {
     return html`
-      <umb-body-layout>
-        <div slot="header">
-          <h1>Linked Pages</h1>
-        </div>
+      <umb-body-layout headline="Linked Pages">
         <div>
-          <uui-box
-            >${when(
+          <div class="layout">
+            ${when(
               this.relationCount == 0,
               () => html`This content has no relations.`,
             )}${this.renderRelationCount()}${this.renderParents()}
-            ${this.renderLinks()}${this.renderIgnored()}
-            ${this.renderAdd()}</uui-box
-          >
+            ${this.renderLinks()}${this.renderAdd()}${this.renderIgnored()}
+          </div>
         </div>
         <div slot="actions">
           <uui-button
@@ -139,18 +135,19 @@ export class LinkedPagesDialogElement
   renderRelationCount() {
     console.log("relation count:", this.relationCount);
     return html`${when(
-        this.relationCount > 0,
-        () =>
-          html`The current page <strong>${this._documentName}</strong> is linked
-            to the following
-            <span
-              >${when(
-                this.relationCount > 1,
-                () => html`${this.relationCount} pages`,
-              )}${when(this.relationCount == 1, () => html`page`)}</span
-            >`,
-      )}
-      <p class="abstract"></p>`;
+      this.relationCount > 0,
+      () =>
+        html`<div>
+          The current page <strong>${this._documentName}</strong> is linked to
+          the following
+          <span
+            >${when(
+              this.relationCount > 1,
+              () => html`${this.relationCount} pages`,
+            )}${when(this.relationCount == 1, () => html`page`)}</span
+          >
+        </div>`,
+    )}`;
   }
 
   renderParents() {
@@ -159,10 +156,16 @@ export class LinkedPagesDialogElement
     });
 
     if (this.parents?.length)
-      return html`<h5>Parent Links</h5>
-        <p><em>You can only remove parent links from the parent node</em></p>
+      return html` <div class="links">
+        <div class="title">
+          <h5>Parent Links</h5>
+          <p>
+            <em>You can only remove parent links from the parent node</em>
+          </p>
+        </div>
 
-        <div class="links">${items}</div>`;
+        ${items}
+      </div>`;
   }
 
   renderLinks() {
@@ -174,9 +177,11 @@ export class LinkedPagesDialogElement
     });
 
     if (this.childlinks?.length)
-      return html`<h5>Linked Pages</h5>
+      return html` <div class="links">
+        <div class="title"><h5>Linked Pages</h5></div>
 
-        <div class="links">${items}</div>`;
+        ${items}
+      </div>`;
   }
 
   renderAdd() {
@@ -207,17 +212,42 @@ export class LinkedPagesDialogElement
 
   renderIgnored() {
     const ignoreCount = this.ignoredTypes?.length ?? 0;
-    return html`${when(
-      ignoreCount > 0,
-      () =>
-        html`Not showing relations of
-        ${when(ignoreCount > 1, () => html`types`)}
-        ${when(ignoreCount == 1, () => html`type`)}
-        ${this.ignoredTypes?.join(", ")}`,
-    )}`;
+    return html`<div class="ignored">
+      ${when(
+        ignoreCount > 0,
+        () =>
+          html`<em
+            >Not showing relations of
+            ${when(ignoreCount > 1, () => html`types`)}
+            ${when(ignoreCount == 1, () => html`type`)}
+            <strong>${this.ignoredTypes?.join(", ")}</strong></em
+          >`,
+      )}
+    </div>`;
   }
 
   static styles = css`
+    .layout {
+      display: flex;
+      flex-direction: column;
+      gap: var(--uui-size-space-5);
+    }
+
+    .title {
+      margin: var(--uui-size-4) 0;
+      border-bottom: 1px solid #aaa;
+    }
+    .title h5 {
+      font-size: var(--uui-type-h5-size, 14px);
+      line-height: inherit;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .title p {
+      margin: 0;
+    }
+
     .links {
       display: flex;
       flex-direction: column;
@@ -228,6 +258,11 @@ export class LinkedPagesDialogElement
       display: flex;
       justify-content: flex-end;
       margin: 10px 0;
+    }
+
+    .ignored {
+      margin: 20px 0;
+      color: var(--uui-color-disabled-contrast);
     }
   `;
 }

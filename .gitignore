@@ -250,3 +250,4 @@ $RECYCLE.BIN/
 src/.idea
 /src/LinkedPages.Site
 /src/Umbraco.Community.LinkedPages/wwwroot/App_Plugins/UmbracoCommunityLinkedPages
+/src/dist
