@@ -72,14 +72,12 @@ export class LinkedPagesDialogElement
           this.parents = _parents;
           this.relationCount =
             (this.parents?.length ?? 0) + (this.childlinks?.length ?? 0);
-          //console.log("parents observed", _parents);
         });
 
         this.observe(_linkedPagesContext.children, (_children) => {
           this.childlinks = _children;
           this.relationCount =
             (this.parents?.length ?? 0) + (this.childlinks?.length ?? 0);
-          //console.log("children observed", _children);
         });
 
         this.ignoredTypes = await _linkedPagesContext.getIgnored();
@@ -95,14 +93,12 @@ export class LinkedPagesDialogElement
     if (!this.data || !data) return;
 
     this._documentName = data.variants[0].name;
-    //console.log(this._documentName);
 
     this.#linkedPagesContexts?.getParents(this.data?.uniqueId);
     this.#linkedPagesContexts?.getChildren(this.data?.uniqueId);
   }
 
   #onRemove(e: CustomEvent) {
-    //console.log("detail", e.detail);
     this.#linkedPagesContexts?.removeLink(
       e.detail.item.relationId,
       this.data?.uniqueId ?? "",
@@ -133,7 +129,6 @@ export class LinkedPagesDialogElement
   }
 
   renderRelationCount() {
-    console.log("relation count:", this.relationCount);
     return html`${when(
       this.relationCount > 0,
       () =>
@@ -197,7 +192,6 @@ export class LinkedPagesDialogElement
 
   async #openAdd() {
     if (!this.data?.uniqueId) return;
-    //console.log(this.args);
     const returnedValue = await umbOpenModal(this, ADD_LINK_MODAL_TOKEN, {
       data: {
         uniqueId: this.data?.uniqueId,

@@ -49,7 +49,7 @@ public class LinkedPagesApiController : LinkedPagesApiControllerBase
             .ToArray();
     }
 
-    [HttpGet("GetIgnoredTypeAlias")]
+    [HttpGet("IgnoredTypeAlias")]
     [ProducesResponseType<List<string>>(StatusCodes.Status200OK)]
     public List<string> getIgnoredTypeAlias()
     {
@@ -65,7 +65,7 @@ public class LinkedPagesApiController : LinkedPagesApiControllerBase
         return ignoredTypes;
     }
 
-    [HttpGet("GetChildLinks")]
+    [HttpGet("ChildLinks")]
     [ProducesResponseType<IEnumerable<LinkedPageInfo>>(StatusCodes.Status200OK)]
     public IEnumerable<LinkedPageInfo> GetChildLinks(Guid key)
     {
@@ -78,7 +78,7 @@ public class LinkedPagesApiController : LinkedPagesApiControllerBase
         return GetRelations(relations, true);
     }
 
-    [HttpPost("GetParentLinks")]
+    [HttpGet("ParentLinks")]
     [ProducesResponseType<IEnumerable<LinkedPageInfo>>(StatusCodes.Status200OK)]
     public IEnumerable<LinkedPageInfo> GetParentLinks(Guid key)
     {

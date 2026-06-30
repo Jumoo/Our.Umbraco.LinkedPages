@@ -11,7 +11,7 @@ import {
 @customElement("linked-item")
 export class LinkedItemView extends UmbLitElement {
   @property({ type: Object })
-  item?: LinkedPageInfo;
+  item?: LinkedPageInfo | null;
 
   @property({ type: Boolean })
   showType: boolean = true;

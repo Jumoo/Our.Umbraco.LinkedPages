@@ -6,15 +6,15 @@
   "scripts": {
     "watch": "tsc && vite build --watch",
     "build": "tsc && vite build",
-    "generate-client": "node scripts/generate-openapi.js https://localhost:44372/umbraco/swagger/umbracocommunitylinkedpages/swagger.json?urls.primaryName=Umbraco+Community+Linked+Pages+Backoffice+API"
+    "generate-client": "node scripts/generate-openapi.js https://localhost:44317/umbraco/openapi/umbracocommunitylinkedpages.json"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.95.0",
-    "@umbraco-cms/backoffice": "^17.3.0",
+    "@hey-api/openapi-ts": "^0.97.0",
+    "@umbraco-cms/backoffice": "^18.0.0",
     "chalk": "^5.6.2",
     "cross-env": "^10.1.0",
     "node-fetch": "^3.3.2",
     "typescript": "^5.9.3",
-    "vite": "^7.1.9"
+    "vite": "^7.3.6"
   }
 }

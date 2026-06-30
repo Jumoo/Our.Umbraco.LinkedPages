@@ -12,7 +12,7 @@ export class AddLinkAction extends UmbEntityActionBase<never> {
     const returnedValue = await umbOpenModal(this, ADD_LINK_MODAL_TOKEN, {
       data: { uniqueId: this.args.unique },
     }).catch(() => undefined);
-    console.log(returnedValue);
+    console.debug(returnedValue);
   }
 }
 

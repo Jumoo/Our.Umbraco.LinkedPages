@@ -2,7 +2,7 @@
 
 import type { Client, Options as Options2, TDataShape } from './client';
 import { client } from './client.gen';
-import type { CreateLinkData, CreateLinkErrors, CreateLinkResponses, GetChildLinksData, GetChildLinksErrors, GetChildLinksResponses, GetIgnoredTypeAliasData, GetIgnoredTypeAliasErrors, GetIgnoredTypeAliasResponses, GetParentLinksData, GetParentLinksErrors, GetParentLinksResponses, RemoveLinkData, RemoveLinkErrors, RemoveLinkResponses } from './types.gen';
+import type { DeleteRemoveLinkData, DeleteRemoveLinkErrors, DeleteRemoveLinkResponses, GetChildLinksData, GetChildLinksErrors, GetChildLinksResponses, GetIgnoredTypeAliasData, GetIgnoredTypeAliasErrors, GetIgnoredTypeAliasResponses, GetParentLinksData, GetParentLinksErrors, GetParentLinksResponses, PostCreateLinkData, PostCreateLinkErrors, PostCreateLinkResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -18,44 +18,32 @@ export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends 
     meta?: Record<string, unknown>;
 };
 
-export class UmbracoCommunityLinkedPagesService {
-    public static createLink<ThrowOnError extends boolean = true>(options?: Options<CreateLinkData, ThrowOnError>) {
-        return (options?.client ?? client).post<CreateLinkResponses, CreateLinkErrors, ThrowOnError>({
-            security: [{ scheme: 'bearer', type: 'http' }],
-            url: '/umbraco/umbracocommunitylinkedpages/api/v1/CreateLink',
-            ...options
-        });
-    }
-    
-    public static getChildLinks<ThrowOnError extends boolean = true>(options?: Options<GetChildLinksData, ThrowOnError>) {
-        return (options?.client ?? client).get<GetChildLinksResponses, GetChildLinksErrors, ThrowOnError>({
-            security: [{ scheme: 'bearer', type: 'http' }],
-            url: '/umbraco/umbracocommunitylinkedpages/api/v1/GetChildLinks',
-            ...options
-        });
-    }
-    
-    public static getIgnoredTypeAlias<ThrowOnError extends boolean = true>(options?: Options<GetIgnoredTypeAliasData, ThrowOnError>) {
-        return (options?.client ?? client).get<GetIgnoredTypeAliasResponses, GetIgnoredTypeAliasErrors, ThrowOnError>({
-            security: [{ scheme: 'bearer', type: 'http' }],
-            url: '/umbraco/umbracocommunitylinkedpages/api/v1/GetIgnoredTypeAlias',
-            ...options
-        });
-    }
-    
-    public static getParentLinks<ThrowOnError extends boolean = true>(options?: Options<GetParentLinksData, ThrowOnError>) {
-        return (options?.client ?? client).post<GetParentLinksResponses, GetParentLinksErrors, ThrowOnError>({
-            security: [{ scheme: 'bearer', type: 'http' }],
-            url: '/umbraco/umbracocommunitylinkedpages/api/v1/GetParentLinks',
-            ...options
-        });
-    }
-    
-    public static removeLink<ThrowOnError extends boolean = true>(options?: Options<RemoveLinkData, ThrowOnError>) {
-        return (options?.client ?? client).delete<RemoveLinkResponses, RemoveLinkErrors, ThrowOnError>({
-            security: [{ scheme: 'bearer', type: 'http' }],
-            url: '/umbraco/umbracocommunitylinkedpages/api/v1/RemoveLink',
-            ...options
-        });
-    }
-}
+export const getChildLinks = <ThrowOnError extends boolean = false>(options?: Options<GetChildLinksData, ThrowOnError>) => (options?.client ?? client).get<GetChildLinksResponses, GetChildLinksErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/umbraco/umbracocommunitylinkedpages/api/v1/ChildLinks',
+    ...options
+});
+
+export const postCreateLink = <ThrowOnError extends boolean = false>(options?: Options<PostCreateLinkData, ThrowOnError>) => (options?.client ?? client).post<PostCreateLinkResponses, PostCreateLinkErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/umbraco/umbracocommunitylinkedpages/api/v1/CreateLink',
+    ...options
+});
+
+export const getIgnoredTypeAlias = <ThrowOnError extends boolean = false>(options?: Options<GetIgnoredTypeAliasData, ThrowOnError>) => (options?.client ?? client).get<GetIgnoredTypeAliasResponses, GetIgnoredTypeAliasErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/umbraco/umbracocommunitylinkedpages/api/v1/IgnoredTypeAlias',
+    ...options
+});
+
+export const getParentLinks = <ThrowOnError extends boolean = false>(options?: Options<GetParentLinksData, ThrowOnError>) => (options?.client ?? client).get<GetParentLinksResponses, GetParentLinksErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/umbraco/umbracocommunitylinkedpages/api/v1/ParentLinks',
+    ...options
+});
+
+export const deleteRemoveLink = <ThrowOnError extends boolean = false>(options?: Options<DeleteRemoveLinkData, ThrowOnError>) => (options?.client ?? client).delete<DeleteRemoveLinkResponses, DeleteRemoveLinkErrors, ThrowOnError>({
+    security: [{ scheme: 'bearer', type: 'http' }],
+    url: '/umbraco/umbracocommunitylinkedpages/api/v1/RemoveLink',
+    ...options
+});

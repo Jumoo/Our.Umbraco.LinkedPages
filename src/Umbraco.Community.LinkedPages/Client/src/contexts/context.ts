@@ -1,5 +1,12 @@
 import { UmbControllerBase } from "@umbraco-cms/backoffice/class-api";
-import { LinkedPageInfo, UmbracoCommunityLinkedPagesService } from "../api";
+import {
+  deleteRemoveLink,
+  getChildLinks,
+  getIgnoredTypeAlias,
+  getParentLinks,
+  LinkedPageInfo,
+  postCreateLink,
+} from "../api";
 import { UmbControllerHost } from "@umbraco-cms/backoffice/controller-api";
 import { UmbContextToken } from "@umbraco-cms/backoffice/context-api";
 import { UmbArrayState } from "@umbraco-cms/backoffice/observable-api";
@@ -25,14 +32,14 @@ export class LinkedPagesContext extends UmbControllerBase {
   async getRelationCount(uniqueId: string) {
     let children = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.getChildLinks({
+      getChildLinks({
         query: { key: uniqueId },
       }),
     );
     const childCount = children.data?.length ?? 0;
     let parents = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.getParentLinks({
+      getParentLinks({
         query: { key: uniqueId },
       }),
     );
@@ -42,10 +49,9 @@ export class LinkedPagesContext extends UmbControllerBase {
   }
 
   async getParents(uniqueId: string) {
-    console.log("get parents called");
     let parents = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.getParentLinks({
+      getParentLinks({
         query: {
           key: uniqueId,
         },
@@ -55,10 +61,9 @@ export class LinkedPagesContext extends UmbControllerBase {
   }
 
   async getChildren(uniqueId: string) {
-    console.log("get children called");
     let children = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.getChildLinks({
+      getChildLinks({
         query: { key: uniqueId },
       }),
     );
@@ -66,17 +71,14 @@ export class LinkedPagesContext extends UmbControllerBase {
   }
 
   async getIgnored() {
-    let ignoredTypes = await tryExecute(
-      this.#host,
-      UmbracoCommunityLinkedPagesService.getIgnoredTypeAlias(),
-    );
+    let ignoredTypes = await tryExecute(this.#host, getIgnoredTypeAlias());
     return ignoredTypes.data;
   }
 
   async removeLink(id: number, currentPage: string) {
     let children = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.removeLink({
+      deleteRemoveLink({
         query: { key: id, currentPage: currentPage },
       }),
     );
@@ -86,7 +88,7 @@ export class LinkedPagesContext extends UmbControllerBase {
   async addLink(parentId: string, childId: string) {
     let children = await tryExecute(
       this.#host,
-      UmbracoCommunityLinkedPagesService.createLink({
+      postCreateLink({
         query: { parent: parentId, child: childId },
       }),
     );
