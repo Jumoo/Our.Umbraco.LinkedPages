@@ -6,7 +6,7 @@
         "Url": "https://jumoo.co.uk",
         "ImageUrl": "https://jumoo.co.uk/img/ju_square.jpg"
     },
-    "AlternatePackageNames": [ "LinkedPages" ],
+    "AlternatePackageNames": [ "LinkedPages", "Our.Umbraco.LinkedPages" ],
     "Category": "Editor Tools",
     "PackageType": "Package",
     "LicenseTypes": ["Free"],
@@ -17,6 +17,7 @@
         "Jumoo.TranslationManger",
         "Our.Umbraco.BackOfficeThemes",
         "Our.Umbraco.LinkedPages",
+        "Umbraco.Community.LinkedPages",
         "Our.Umbraco.MaintenanceMode"
     ],
     "RelatedPackages": [
