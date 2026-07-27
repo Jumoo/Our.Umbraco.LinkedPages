@@ -3,11 +3,11 @@ Context Menu option for managing relations in Umbraco
 
 ## View Linked pages from the context menu
 
-![](/screenshots/ContextMenu_v18.PNG)
+![](/screenshots/ContextMenu.PNG)
 
 Add or remove relations directly on a node.
 
-![](/screenshots/LinksDialog_v18.PNG)
+![](/screenshots/LinksDialog.PNG)
 
 ### Build process
 > This branch is multi-targeting, and will generate a nuget package that works on Umbraco v8 (.netframework) and v9 (.netcore)
