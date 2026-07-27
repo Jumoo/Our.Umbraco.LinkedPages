@@ -6,7 +6,7 @@ Linked pages adds a new "Linked Pages" item to the context menu of items in the 
 
 From here you can quickly and easily see the related items for any page.
 
-![Linked pages dialog](https://raw.githubusercontent.com/KevinJump/Our.Umbraco.LinkedPages/dev/multi-target/screenshots/LinksDialog_v18.PNG)
+![Linked pages dialog](https://github.com/Jumoo/Our.Umbraco.LinkedPages/blob/v18/main/screenshots/ContextMenu_v18.png?raw=true)
 
 # Config
 
