@@ -6,6 +6,9 @@
 		<StaticWebAssetBasePath>/</StaticWebAssetBasePath>
 		<PackageTags>umbraco plugin package</PackageTags>
 		<PackageTags>umbraco umbraco-marketplace</PackageTags>
+
+		<PackageIcon>logo.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
 	</PropertyGroup>
 
 	<PropertyGroup>
