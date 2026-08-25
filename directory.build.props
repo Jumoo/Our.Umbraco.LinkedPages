@@ -1,4 +1,32 @@
 <Project>
+
+	<PropertyGroup>
+		<LangVersion>latest</LangVersion>
+		<!-- without this, transitive packages we don't control (e.g. SQLitePCLRaw)
+		     surface NU1903 audit warnings on every build -->
+		<NuGetAuditMode>direct</NuGetAuditMode>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Authors>Jumoo</Authors>
+		<Company>Jumoo</Company>
+		<Copyright>Jumoo @ 2015-2026</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Jumoo/Our.Umbraco.LinkedPages</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Jumoo/Our.Umbraco.LinkedPages</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+		<!-- don't append the build onto the version -->
+		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+		<!-- lock files, so a transitive update can't change a build without a commit -->
+		<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+	</PropertyGroup>
+
 	<!-- Workaround for this bug (replace the analyzer name with the one you need to exclude (filename only, no extension) -->
 	<Target Name="RemoveLuceneAnalyzer" BeforeTargets="CoreCompile">
 		<ItemGroup>

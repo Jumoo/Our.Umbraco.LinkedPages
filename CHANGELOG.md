@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Standard open-source repository documentation (LICENSE, CONTRIBUTING,
   CODE_OF_CONDUCT, SECURITY, issue/PR templates, CI workflow).
+- Standard repository tooling to match other Jumoo package repos:
+  `.editorconfig`, `global.json`, `GitVersion.yml`, `CLAUDE.md`, and a
+  `packages.lock.json` for the package project.
+- CodeQL scanning, Dependabot (NuGet, npm, GitHub Actions), and a split
+  CI pipeline (`dotnet-build.yml` for PRs, `package-build.yml` for review
+  builds on push, `release.yml` for tag-triggered NuGet releases via
+  trusted publishing), replacing the single `build.yml` workflow.
 
 ## [18.0.0] - 2026-06-30
 

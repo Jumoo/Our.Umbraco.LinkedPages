@@ -1,4 +1,4 @@
-[![Build](https://github.com/Jumoo/Our.Umbraco.LinkedPages/actions/workflows/build.yml/badge.svg)](https://github.com/Jumoo/Our.Umbraco.LinkedPages/actions/workflows/build.yml)
+[![Build and Package](https://github.com/Jumoo/Our.Umbraco.LinkedPages/actions/workflows/package-build.yml/badge.svg)](https://github.com/Jumoo/Our.Umbraco.LinkedPages/actions/workflows/package-build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 # Our.Umbraco.LinkedPages
