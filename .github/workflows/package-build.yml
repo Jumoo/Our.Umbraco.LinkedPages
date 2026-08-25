@@ -105,7 +105,7 @@ jobs:
       # for review on every push to the release branch and does not release. That happens in
       # release.yml, triggered by pushing a v{version} tag.
       - name: Upload nuget package as build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nuget-build-output
           path: ${{ env.out_folder }}

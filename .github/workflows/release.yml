@@ -116,7 +116,7 @@ jobs:
 
       # keep a copy regardless of what happens on the push
       - name: upload package as build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nuget-release-${{ steps.version.outputs.version }}
           path: ${{ env.out_folder }}
