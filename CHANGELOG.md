@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [18.0.5] - 2026-10-26
+
+### Fixed
+
+- Umbraco package references are pinned to `[18.0.0, 19.0.0)`. They were `18.0.0-rc3` and
+  unbounded `*`, so the package could pull in an Umbraco release candidate or a future major.
+
+### Changed
+
+- Backoffice client dependency updates (vite 8, chalk 6).
+
+## [18.0.4] - 2026-08-25
+
 ### Added
 
 - Standard open-source repository documentation (LICENSE, CONTRIBUTING,
@@ -24,6 +37,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Updated package to support Umbraco 18.
+
+## [17.0.1] - 2026-10-26
+
+### Fixed
+
+- Umbraco package references are pinned to the v17 line, so the package can no longer
+  resolve against Umbraco 18.
+
+### Changed
+
+- CI/CD workflows brought over from the v18 line, and backoffice client dependency updates
+  (vite 8, chalk 6).
 
 ## [17.0.0] - 2026-06-15
 
@@ -74,7 +99,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial beta release of Linked Pages for Umbraco v9.
 
-[Latest]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/release/18.0.0...v18/main
+[Latest]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/v18.0.5...v18/main
+[18.0.5]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/v18.0.4...v18.0.5
+[18.0.4]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/v18.0.0...v18.0.4
 [18.0.0]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/release/17.0.0...release/18.0.0
 [17.0.0]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/release/10.0.3...release/17.0.0
 [10.0.3]: https://github.com/Jumoo/Our.Umbraco.LinkedPages/compare/release/10.0.0...release/10.0.3
