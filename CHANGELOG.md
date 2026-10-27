@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- The package no longer depends on `Umbraco.Cms` and `Umbraco.Cms.DevelopmentMode.Backoffice`,
+  so installing it doesn't add the development-mode backoffice to production sites. It now
+  depends only on the Umbraco packages it uses, as 17.x does.
+
 ## [18.0.5] - 2026-10-26
 
 ### Fixed
