@@ -9,12 +9,15 @@
     "generate-client": "node scripts/generate-openapi.js https://localhost:44317/umbraco/openapi/umbracocommunitylinkedpages.json"
   },
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.97.3",
+    "@hey-api/openapi-ts": "^0.99.0",
     "@umbraco-cms/backoffice": "^18.0.0",
     "chalk": "^6.0.1",
     "cross-env": "^10.1.0",
     "node-fetch": "^3.3.2",
     "typescript": "^5.9.3",
-    "vite": "^8.3.4"
+    "vite": "^8.3.5"
+  },
+  "overrides": {
+    "js-yaml": "^4.3.2"
   }
 }
