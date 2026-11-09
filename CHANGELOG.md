@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [18.0.7] - 2026-11-09
+
+### Changed
+
+- The backoffice API client is regenerated with `@hey-api/openapi-ts` 0.99. Calls are still
+  authenticated through the backoffice auth context's `configureClient`.
+- Backoffice client dependency updates (vite 8.3.5), and `js-yaml` is lifted to 4.3.2 to
+  clear security alerts in the build tooling.
+
 ## [18.0.6] - 2026-10-27
 
 ### Fixed
