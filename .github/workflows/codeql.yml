@@ -1,14 +1,9 @@
 name: CodeQL
 
+# Weekly only, not on every push and PR (Jumoo/jumoo-context#159). A week's delay on a finding
+# costs little. Scheduled runs scan the default branch only; run it by hand on another branch.
+# Don't turn on GitHub's "default setup" for CodeQL: it scans every push and PR.
 on:
-  push:
-    branches: [ "main", "*/main" ]
-    paths-ignore:
-      - "**.md"
-  pull_request:
-    branches: [ "main", "*/main" ]
-    paths-ignore:
-      - "**.md"
   schedule:
     # weekly, so advisories published after a change still get picked up
     - cron: "33 8 * * 0"
